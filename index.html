@@ -25,7 +25,6 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
   perspective:1000px;
 }
 
-/* ---------- ATMÓSFERA ---------- */
 .glow{position:absolute;border-radius:50%;filter:blur(35px);opacity:.35;pointer-events:none}
 .g1{width:180px;height:180px;background:#ff175f;left:-70px;top:12%}
 .g2{width:220px;height:220px;background:#ff6b91;right:-100px;bottom:8%}
@@ -40,7 +39,6 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 }
 @keyframes wind{from{transform:translateX(-12px) skewX(-1deg)}to{transform:translateX(12px) skewX(1deg)}}
 
-/* ---------- PORTADA ---------- */
 #lockScreen{
   position:absolute;inset:0;z-index:20;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -91,9 +89,16 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 .keyhole:after{content:"";position:absolute;width:10px;height:22px;background:#ffd8e5;left:8px;top:18px;border-radius:5px}
 
 .key{
-  position:absolute;left:50%;bottom:7%;z-index:25;
-  width:155px;height:75px;transform:translateX(-50%);
-  cursor:grab;touch-action:none;user-select:none;
+  position:absolute;
+  left:50%;
+  bottom:7%;
+  z-index:30;
+  width:155px;
+  height:75px;
+  transform:translateX(-50%);
+  cursor:grab;
+  touch-action:none;
+  user-select:none;
   filter:drop-shadow(0 12px 12px rgba(0,0,0,.5));
 }
 .key .ring{
@@ -115,7 +120,6 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 }
 #openBtn.ready{opacity:1;pointer-events:auto}
 
-/* ---------- CONTENIDO ---------- */
 #book{
   position:absolute;inset:0;z-index:10;
   opacity:0;pointer-events:none;
@@ -204,18 +208,31 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 .btn:active{transform:scale(.96)}
 #musicBtn{position:absolute;right:15px;top:13px;z-index:30;width:42px;height:42px;border-radius:50%;border:1px solid #ff7da5;background:rgba(50,0,20,.7);color:white;font-size:18px}
 
-/* ---------- CORAZONES / PÉTALOS ---------- */
-#particles{position:absolute;inset:0;z-index:4;pointer-events:none}
-.particle{position:absolute;will-change:transform;user-select:none}
+/* ===== PARTÍCULAS BIEN VISIBLES Y 3D ===== */
+#particles{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  pointer-events:none;
+  overflow:hidden;
+}
+.particle{
+  position:absolute;
+  will-change:transform, opacity;
+  user-select:none;
+  pointer-events:none;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));
+}
+
 .rose{
   position:absolute;z-index:2;font-size:clamp(25px,8vw,42px);
   filter:drop-shadow(0 5px 7px rgba(0,0,0,.45));
   animation:sway 4s ease-in-out infinite alternate;
 }
-.r1{left:2%;bottom:18%}.r2{right:3%;bottom:19%;animation-delay:1s}.r3{left:8%;top:25%;font-size:28px}.r4{right:7%;top:27%;font-size:31px}
+.r1{left:2%;bottom:18%}.r2{right:3%;bottom:19%;animation-delay:1s}
+.r3{left:8%;top:25%;font-size:28px}.r4{right:7%;top:27%;font-size:31px}
 @keyframes sway{to{transform:translateY(-8px) rotate(8deg)}}
 
-/* ---------- FINAL (solo se muestra cuando está activa) ---------- */
 .final{
   flex-direction:column;
   align-items:center;
@@ -260,7 +277,6 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
     <div id="wind"></div>
     <div id="particles"></div>
 
-    <!-- PORTADA -->
     <section id="lockScreen">
       <div class="brand">Nuestra historia ❤️</div>
       <div class="subtitle">un pequeño regalo para vos</div>
@@ -271,19 +287,19 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 
       <div class="hint">🔑 Arrastrá la llave hasta el candado<br>y después abrilo</div>
 
-      <div class="key" id="key" aria-label="Llave arrastrable">
-        <div class="ring"></div><div class="shaft"></div>
-        <div class="tooth1"></div><div class="tooth2"></div>
+      <div class="key" id="key">
+        <div class="ring"></div>
+        <div class="shaft"></div>
+        <div class="tooth1"></div>
+        <div class="tooth2"></div>
       </div>
 
       <button id="openBtn">🔓 Abrir candado</button>
     </section>
 
-    <!-- LIBRO -->
     <main id="book">
       <button id="musicBtn">♫</button>
 
-      <!-- PÁGINA 1 -->
       <section class="page active" data-page="1">
         <div class="pageBg"></div><div class="land"></div><div class="road"></div>
         <div class="rose r1">🌹</div><div class="rose r2">🌹</div>
@@ -330,7 +346,6 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
         </div>
       </section>
 
-      <!-- PÁGINA 2 -->
       <section class="page" data-page="2">
         <div class="pageBg"></div><div class="land"></div><div class="road"></div>
         <div class="rose r1">🌹</div><div class="rose r2">🌹</div>
@@ -385,7 +400,6 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
         </div>
       </section>
 
-      <!-- FINAL -->
       <section class="page final" data-page="3">
         <div class="finalHeart"></div>
         <h2>Te amo, mi amor ❤️</h2>
@@ -403,15 +417,10 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
     </main>
   </div>
 
-  <!-- Cambiá el nombre del archivo si tu música se llama diferente -->
   <audio id="music" src="musiica.mp3" loop preload="auto"></audio>
 </div>
 
 <script>
-/* =========================================================
-   ANIMACIONES 3D + FÍSICA LIGERA PARA CELULAR
-   ========================================================= */
-
 const lockScreen = document.getElementById('lockScreen');
 const book = document.getElementById('book');
 const key = document.getElementById('key');
@@ -421,158 +430,190 @@ const musicBtn = document.getElementById('musicBtn');
 const particles = document.getElementById('particles');
 
 let unlocked = false;
-let dragging = false;
-let keyX = 0, keyY = 0, startX = 0, startY = 0;
-let keyHomeX = 0, keyHomeY = 0;
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
 
-/* ----- llave táctil / mouse ----- */
-function pointerPos(e){
-  if(e.touches && e.touches[0]) return {x:e.touches[0].clientX,y:e.touches[0].clientY};
-  return {x:e.clientX,y:e.clientY};
-}
-function startDrag(e){
-  if(unlocked)return;
+/* ========== LLAVE ========== */
+key.addEventListener('pointerdown', function(e) {
+  if (unlocked) return;
   e.preventDefault();
-  const p=pointerPos(e);
-  const r=key.getBoundingClientRect();
-  startX=p.x; startY=p.y;
-  keyHomeX=r.left + r.width/2;
-  keyHomeY=r.top + r.height/2;
-  dragging=true;
-  key.style.transition='none';
-}
-function moveDrag(e){
-  if(!dragging || unlocked)return;
-  e.preventDefault();
-  const p=pointerPos(e);
-  keyX=p.x-keyHomeX;
-  keyY=p.y-keyHomeY;
-  key.style.transform=`translate(calc(-50% + \( {keyX}px), \){keyY}px) rotate(${keyX*.04}deg)`;
-  const lock=document.querySelector('.lock').getBoundingClientRect();
-  const kr=key.getBoundingClientRect();
-  const cx=kr.left+kr.width/2, cy=kr.top+kr.height/2;
-  const lx=lock.left+lock.width/2, ly=lock.top+lock.height/2;
-  const d=Math.hypot(cx-lx,cy-ly);
-  if(d<75){
-    key.style.filter='drop-shadow(0 0 18px #ff9dbc)';
-  }else key.style.filter='drop-shadow(0 12px 12px rgba(0,0,0,.5))';
-}
-function endDrag(){
-  if(!dragging)return;
-  dragging=false;
-  const lock=document.querySelector('.lock').getBoundingClientRect();
-  const kr=key.getBoundingClientRect();
-  const cx=kr.left+kr.width/2, cy=kr.top+kr.height/2;
-  const lx=lock.left+lock.width/2, ly=lock.top+lock.height/2;
-  const d=Math.hypot(cx-lx,cy-ly);
+  isDragging = true;
+  key.setPointerCapture(e.pointerId);
+  
+  const rect = key.getBoundingClientRect();
+  offsetX = e.clientX - rect.left;
+  offsetY = e.clientY - rect.top;
+  
+  key.style.transition = 'none';
+  key.style.cursor = 'grabbing';
+  key.style.zIndex = '40';
+});
 
-  if(d<85){
-    key.style.transition='transform .5s ease,opacity .5s ease';
-    key.style.transform='translate(-50%, -20px) rotate(90deg) scale(.7)';
-    key.style.opacity='.15';
-    unlocked=true;
+key.addEventListener('pointermove', function(e) {
+  if (!isDragging || unlocked) return;
+  e.preventDefault();
+
+  const x = e.clientX - offsetX;
+  const y = e.clientY - offsetY;
+
+  key.style.left = x + 'px';
+  key.style.top = y + 'px';
+  key.style.bottom = 'auto';
+  key.style.transform = 'none';
+
+  const lock = document.querySelector('.lock').getBoundingClientRect();
+  const kr = key.getBoundingClientRect();
+  const cx = kr.left + kr.width / 2;
+  const cy = kr.top + kr.height / 2;
+  const lx = lock.left + lock.width / 2;
+  const ly = lock.top + lock.height / 2;
+  const dist = Math.hypot(cx - lx, cy - ly);
+
+  key.style.filter = dist < 85 
+    ? 'drop-shadow(0 0 22px #ff9dbc)' 
+    : 'drop-shadow(0 12px 12px rgba(0,0,0,.5))';
+});
+
+key.addEventListener('pointerup', function(e) {
+  if (!isDragging) return;
+  isDragging = false;
+  key.releasePointerCapture(e.pointerId);
+  key.style.cursor = 'grab';
+
+  const lock = document.querySelector('.lock').getBoundingClientRect();
+  const kr = key.getBoundingClientRect();
+  const cx = kr.left + kr.width / 2;
+  const cy = kr.top + kr.height / 2;
+  const lx = lock.left + lock.width / 2;
+  const ly = lock.top + lock.height / 2;
+  const dist = Math.hypot(cx - lx, cy - ly);
+
+  if (dist < 95) {
+    key.style.transition = 'all .5s ease';
+    key.style.left = '50%';
+    key.style.top = '38%';
+    key.style.transform = 'translateX(-50%) rotate(90deg) scale(0.7)';
+    key.style.opacity = '0.25';
+    unlocked = true;
     openBtn.classList.add('ready');
-  }else{
-    key.style.transition='transform .45s cubic-bezier(.2,.8,.2,1)';
-    key.style.transform='translateX(-50%)';
+  } else {
+    key.style.transition = 'all .4s cubic-bezier(.2,.8,.2,1)';
+    key.style.left = '50%';
+    key.style.top = '';
+    key.style.bottom = '7%';
+    key.style.transform = 'translateX(-50%)';
+    key.style.filter = 'drop-shadow(0 12px 12px rgba(0,0,0,.5))';
   }
-}
-key.addEventListener('mousedown',startDrag);
-window.addEventListener('mousemove',moveDrag);
-window.addEventListener('mouseup',endDrag);
-key.addEventListener('touchstart',startDrag,{passive:false});
-window.addEventListener('touchmove',moveDrag,{passive:false});
-window.addEventListener('touchend',endDrag);
+});
 
-/* ----- abrir ----- */
-openBtn.addEventListener('click',()=>{
-  if(!unlocked)return;
+key.addEventListener('pointercancel', function() {
+  isDragging = false;
+});
+
+/* ========== ABRIR ========== */
+openBtn.addEventListener('click', () => {
+  if (!unlocked) return;
   lockScreen.classList.add('hide');
   book.classList.add('show');
-  music.play().then(()=>musicBtn.textContent='🔊').catch(()=>musicBtn.textContent='♫');
+  music.play().then(() => musicBtn.textContent = '🔊').catch(() => {});
   burstHearts();
 });
 
-/* ----- música ----- */
-musicBtn.addEventListener('click',()=>{
-  if(music.paused){
-    music.play().then(()=>musicBtn.textContent='🔊');
-  }else{
-    music.pause(); musicBtn.textContent='♫';
+/* ========== MÚSICA ========== */
+musicBtn.addEventListener('click', () => {
+  if (music.paused) {
+    music.play().then(() => musicBtn.textContent = '🔊');
+  } else {
+    music.pause();
+    musicBtn.textContent = '♫';
   }
 });
 
-/* ----- páginas ----- */
-let currentPage=1;
-function goPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const target=document.querySelector(`.page[data-page="${n}"]`);
-  if(target) target.classList.add('active');
-  currentPage=n;
+/* ========== PÁGINAS ========== */
+let currentPage = 1;
+function goPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`.page[data-page="${n}"]`);
+  if (target) target.classList.add('active');
+  currentPage = n;
   burstHearts();
 }
 
-/* ----- swipe ----- */
-let touchStartX=0;
-document.addEventListener('touchstart',e=>{
-  touchStartX=e.touches[0].clientX;
-},{passive:true});
-document.addEventListener('touchend',e=>{
-  if(!book.classList.contains('show'))return;
-  const dx=e.changedTouches[0].clientX-touchStartX;
-  if(Math.abs(dx)<70)return;
-  if(dx<0 && currentPage<3)goPage(currentPage+1);
-  if(dx>0 && currentPage>1)goPage(currentPage-1);
-},{passive:true});
+/* Swipe */
+let touchStartX = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
 
-/* =========================================================
-   PARTÍCULAS: corazones + pétalos
-   ========================================================= */
-const items=['❤','♥','🌹','🌸','💗','✦','•'];
-const live=[];
+document.addEventListener('touchend', e => {
+  if (!book.classList.contains('show')) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) < 70) return;
+  if (dx < 0 && currentPage < 3) goPage(currentPage + 1);
+  if (dx > 0 && currentPage > 1) goPage(currentPage - 1);
+}, { passive: true });
 
-function makeParticle(){
-  const el=document.createElement('div');
-  el.className='particle';
-  el.textContent=items[Math.floor(Math.random()*items.length)];
-  const size=10+Math.random()*22;
-  el.style.fontSize=size+'px';
-  el.style.left=Math.random()*100+'%';
-  el.style.top='-30px';
-  el.style.opacity=0.7+Math.random()*0.3;
-  el.style.color=Math.random()>0.5?'#ff6e9b':'#ffabc5';
+/* ========== PARTÍCULAS 3D FUERTES ========== */
+const items = ['❤', '♥', '🌹', '🌸', '💗', '💕', '🎈', '✦', '💖'];
+
+function makeParticle() {
+  const el = document.createElement('div');
+  el.className = 'particle';
+  el.textContent = items[Math.floor(Math.random() * items.length)];
+  
+  const size = 18 + Math.random() * 28;          // más grandes
+  el.style.fontSize = size + 'px';
+  el.style.left = (Math.random() * 100) + '%';
+  el.style.top = '-60px';
+  el.style.opacity = '0.9';
+  el.style.color = Math.random() > 0.4 ? '#ff6e9b' : '#ffb6c9';
+  el.style.textShadow = '0 0 12px rgba(255,80,140,0.7)';
+  
   particles.appendChild(el);
 
-  const duration=4+Math.random()*5;
-  const drift=(Math.random()-0.5)*120;
-  const start=performance.now();
+  const duration = 5 + Math.random() * 4;        // más lentos
+  const drift = (Math.random() - 0.5) * 160;
+  const rotX = (Math.random() - 0.5) * 180;
+  const rotY = (Math.random() - 0.5) * 180;
+  const start = performance.now();
 
-  function animate(now){
-    const t=(now-start)/1000;
-    if(t>duration){
+  function animate(now) {
+    const t = (now - start) / 1000;
+    if (t > duration) {
       el.remove();
       return;
     }
-    const progress=t/duration;
-    el.style.transform=`translate(${drift*progress}px, \( {progress*window.innerHeight*1.2}px) rotate( \){progress*360}deg)`;
-    el.style.opacity=1-progress;
+    const progress = t / duration;
+    
+    // Movimiento 3D
+    el.style.transform = `
+      translate3d(${drift * progress}px, ${progress * (window.innerHeight + 120)}px, 0)
+      rotateX(${rotX * progress}deg)
+      rotateY(${rotY * progress}deg)
+      rotateZ(${progress * 480}deg)
+      scale(${1 - progress * 0.3})
+    `;
+    el.style.opacity = String(0.95 - progress * 0.9);
     requestAnimationFrame(animate);
   }
   requestAnimationFrame(animate);
 }
 
-function burstHearts(){
-  for(let i=0;i<12;i++){
-    setTimeout(makeParticle,i*80);
+function burstHearts() {
+  // Muchas partículas al abrir / cambiar página
+  for (let i = 0; i < 22; i++) {
+    setTimeout(makeParticle, i * 45);
   }
 }
 
-/* Partículas suaves de fondo */
-setInterval(()=>{
-  if(book.classList.contains('show') && Math.random()>0.6){
+// Partículas constantes mientras el libro está abierto
+setInterval(() => {
+  if (book.classList.contains('show')) {
     makeParticle();
+    if (Math.random() > 0.6) makeParticle(); // a veces dos
   }
-},900);
+}, 550);
 </script>
 </body>
 </html>
