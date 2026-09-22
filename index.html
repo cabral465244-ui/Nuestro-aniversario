@@ -163,37 +163,45 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 
 .card{
   position:relative;z-index:5;
-  max-height:43vh;overflow:auto;
-  padding:18px 18px 20px;margin-top:2px;
+  max-height:38vh;overflow:auto;
+  padding:16px 16px 18px;margin-top:2px;
   border:1px solid rgba(255,176,201,.35);
-  border-radius:24px;
+  border-radius:22px;
   background:linear-gradient(145deg,rgba(70,4,25,.74),rgba(20,0,10,.75));
   backdrop-filter:blur(9px);
   box-shadow:0 20px 55px rgba(0,0,0,.35),inset 0 0 35px rgba(255,50,100,.05);
 }
 .card::-webkit-scrollbar{width:0}
 .title{
-  font-family:'Great Vibes',cursive;font-size:44px;color:#ff9ebd;
-  line-height:1.05;text-align:center;margin:0 0 10px;
+  font-family:'Great Vibes',cursive;font-size:40px;color:#ff9ebd;
+  line-height:1.05;text-align:center;margin:0 0 8px;
   text-shadow:0 0 15px rgba(255,65,120,.35);
 }
-.card p{font-size:17px;line-height:1.28;margin:10px 0;color:#fff0f4}
-.signature{font-family:'Great Vibes',cursive;font-size:29px;color:#ff9ebd;text-align:right;margin-top:12px}
+.card p{font-size:16px;line-height:1.28;margin:8px 0;color:#fff0f4}
+.signature{font-family:'Great Vibes',cursive;font-size:26px;color:#ff9ebd;text-align:right;margin-top:10px}
 
+/* ===== FOTOS MÁS GRANDES ===== */
 .photos{
-  position:absolute;left:15px;right:15px;bottom:140px;
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  position:absolute;left:12px;right:12px;bottom:105px;
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
   z-index:6;
 }
 .photo{
-  height:155px;border-radius:18px;overflow:hidden;
-  border:2px solid rgba(255,175,198,.45);
-  background:#18000b;box-shadow:0 12px 35px rgba(0,0,0,.4);
-  transform-style:preserve-3d;
+  height:175px;                    /* más alto */
+  border-radius:16px;overflow:hidden;
+  border:2px solid rgba(255,175,198,.5);
+  background:#18000b;
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+  cursor:pointer;
+  transition:transform .2s;
 }
-.photo:nth-child(1){transform:rotate(-2deg) translateZ(10px)}
-.photo:nth-child(2){transform:rotate(2deg) translateZ(4px)}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo:active{transform:scale(0.97)}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;               /* se ve completa lo mejor posible */
+  display:block;
+}
 
 .nav{
   position:absolute;left:18px;right:18px;bottom:16px;z-index:15;
@@ -208,19 +216,12 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 .btn:active{transform:scale(.96)}
 #musicBtn{position:absolute;right:15px;top:13px;z-index:30;width:42px;height:42px;border-radius:50%;border:1px solid #ff7da5;background:rgba(50,0,20,.7);color:white;font-size:18px}
 
-/* ===== PARTÍCULAS BIEN VISIBLES Y 3D ===== */
+/* Partículas */
 #particles{
-  position:fixed;
-  inset:0;
-  z-index:50;
-  pointer-events:none;
-  overflow:hidden;
+  position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden;
 }
 .particle{
-  position:absolute;
-  will-change:transform, opacity;
-  user-select:none;
-  pointer-events:none;
+  position:absolute;will-change:transform,opacity;user-select:none;pointer-events:none;
   filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));
 }
 
@@ -234,16 +235,11 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 @keyframes sway{to{transform:translateY(-8px) rotate(8deg)}}
 
 .final{
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center;
   padding:30px;
   background:radial-gradient(circle at 50% 42%,rgba(255,25,90,.24),transparent 34%);
 }
-.page.final.active{
-  display:flex !important;
-}
+.page.final.active{display:flex !important}
 .finalHeart{
   width:170px;height:150px;position:relative;margin:0 auto 24px;
   animation:heartBeat 1.8s ease-in-out infinite;
@@ -259,13 +255,37 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
 .final h2{font-family:'Great Vibes',cursive;font-size:56px;color:#ffabc5;margin:0}
 .final p{font-size:20px;line-height:1.4;max-width:340px}
 
+/* ===== LIGHTBOX (foto completa) ===== */
+#lightbox{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,.92);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+#lightbox.show{display:flex}
+#lightbox img{
+  max-width:100%;
+  max-height:85vh;
+  border-radius:12px;
+  object-fit:contain;
+  box-shadow:0 0 40px rgba(255,80,140,.3);
+}
+#lightboxClose{
+  position:absolute;top:18px;right:18px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,60,110,.85);
+  border:none;color:white;font-size:24px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+
 @media(max-height:650px){
  .lockWrap{margin:20px 0 10px;transform:scale(.8)}
- .card{max-height:39vh}
- .photo{height:110px}
- .photos{bottom:125px}
- .card p{font-size:16px}
- .title{font-size:38px}
+ .card{max-height:34vh}
+ .photo{height:145px}
+ .photos{bottom:95px}
+ .card p{font-size:15px}
+ .title{font-size:36px}
 }
 </style>
 </head>
@@ -337,8 +357,12 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
         </article>
 
         <div class="photos">
-          <div class="photo"><img src="imagen1.png" alt="Nuestro recuerdo 1"></div>
-          <div class="photo"><img src="imagen2.png" alt="Nuestro recuerdo 2"></div>
+          <div class="photo" onclick="openLightbox(this)">
+            <img src="imagen1.png" alt="Nuestro recuerdo 1">
+          </div>
+          <div class="photo" onclick="openLightbox(this)">
+            <img src="imagen2.png" alt="Nuestro recuerdo 2">
+          </div>
         </div>
 
         <div class="nav">
@@ -390,8 +414,12 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
         </article>
 
         <div class="photos">
-          <div class="photo"><img src="imagen3.png" alt="Nuestro recuerdo 3"></div>
-          <div class="photo"><img src="imagen4.png" alt="Nuestro recuerdo 4"></div>
+          <div class="photo" onclick="openLightbox(this)">
+            <img src="imagen3.png" alt="Nuestro recuerdo 3">
+          </div>
+          <div class="photo" onclick="openLightbox(this)">
+            <img src="imagen4.png" alt="Nuestro recuerdo 4">
+          </div>
         </div>
 
         <div class="nav">
@@ -417,6 +445,12 @@ body{font-family:'Cormorant Garamond',serif;touch-action:none}
     </main>
   </div>
 
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button id="lightboxClose" onclick="closeLightbox()">×</button>
+    <img id="lightboxImg" src="" alt="Foto ampliada">
+  </div>
+
   <audio id="music" src="musiica.mp3" loop preload="auto"></audio>
 </div>
 
@@ -428,6 +462,8 @@ const openBtn = document.getElementById('openBtn');
 const music = document.getElementById('music');
 const musicBtn = document.getElementById('musicBtn');
 const particles = document.getElementById('particles');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
 
 let unlocked = false;
 let isDragging = false;
@@ -440,11 +476,9 @@ key.addEventListener('pointerdown', function(e) {
   e.preventDefault();
   isDragging = true;
   key.setPointerCapture(e.pointerId);
-  
   const rect = key.getBoundingClientRect();
   offsetX = e.clientX - rect.left;
   offsetY = e.clientY - rect.top;
-  
   key.style.transition = 'none';
   key.style.cursor = 'grabbing';
   key.style.zIndex = '40';
@@ -453,10 +487,8 @@ key.addEventListener('pointerdown', function(e) {
 key.addEventListener('pointermove', function(e) {
   if (!isDragging || unlocked) return;
   e.preventDefault();
-
   const x = e.clientX - offsetX;
   const y = e.clientY - offsetY;
-
   key.style.left = x + 'px';
   key.style.top = y + 'px';
   key.style.bottom = 'auto';
@@ -469,10 +501,7 @@ key.addEventListener('pointermove', function(e) {
   const lx = lock.left + lock.width / 2;
   const ly = lock.top + lock.height / 2;
   const dist = Math.hypot(cx - lx, cy - ly);
-
-  key.style.filter = dist < 85 
-    ? 'drop-shadow(0 0 22px #ff9dbc)' 
-    : 'drop-shadow(0 12px 12px rgba(0,0,0,.5))';
+  key.style.filter = dist < 85 ? 'drop-shadow(0 0 22px #ff9dbc)' : 'drop-shadow(0 12px 12px rgba(0,0,0,.5))';
 });
 
 key.addEventListener('pointerup', function(e) {
@@ -507,9 +536,7 @@ key.addEventListener('pointerup', function(e) {
   }
 });
 
-key.addEventListener('pointercancel', function() {
-  isDragging = false;
-});
+key.addEventListener('pointercancel', function() { isDragging = false; });
 
 /* ========== ABRIR ========== */
 openBtn.addEventListener('click', () => {
@@ -542,10 +569,7 @@ function goPage(n) {
 
 /* Swipe */
 let touchStartX = 0;
-document.addEventListener('touchstart', e => {
-  touchStartX = e.touches[0].clientX;
-}, { passive: true });
-
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
 document.addEventListener('touchend', e => {
   if (!book.classList.contains('show')) return;
   const dx = e.changedTouches[0].clientX - touchStartX;
@@ -554,25 +578,37 @@ document.addEventListener('touchend', e => {
   if (dx > 0 && currentPage > 1) goPage(currentPage - 1);
 }, { passive: true });
 
-/* ========== PARTÍCULAS 3D FUERTES ========== */
+/* ========== LIGHTBOX (foto completa) ========== */
+function openLightbox(el) {
+  const img = el.querySelector('img');
+  lightboxImg.src = img.src;
+  lightbox.classList.add('show');
+}
+function closeLightbox() {
+  lightbox.classList.remove('show');
+}
+// Cerrar también tocando fuera de la imagen
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+/* ========== PARTÍCULAS ========== */
 const items = ['❤', '♥', '🌹', '🌸', '💗', '💕', '🎈', '✦', '💖'];
 
 function makeParticle() {
   const el = document.createElement('div');
   el.className = 'particle';
   el.textContent = items[Math.floor(Math.random() * items.length)];
-  
-  const size = 18 + Math.random() * 28;          // más grandes
+  const size = 18 + Math.random() * 26;
   el.style.fontSize = size + 'px';
   el.style.left = (Math.random() * 100) + '%';
   el.style.top = '-60px';
   el.style.opacity = '0.9';
   el.style.color = Math.random() > 0.4 ? '#ff6e9b' : '#ffb6c9';
   el.style.textShadow = '0 0 12px rgba(255,80,140,0.7)';
-  
   particles.appendChild(el);
 
-  const duration = 5 + Math.random() * 4;        // más lentos
+  const duration = 5 + Math.random() * 4;
   const drift = (Math.random() - 0.5) * 160;
   const rotX = (Math.random() - 0.5) * 180;
   const rotY = (Math.random() - 0.5) * 180;
@@ -580,13 +616,8 @@ function makeParticle() {
 
   function animate(now) {
     const t = (now - start) / 1000;
-    if (t > duration) {
-      el.remove();
-      return;
-    }
+    if (t > duration) { el.remove(); return; }
     const progress = t / duration;
-    
-    // Movimiento 3D
     el.style.transform = `
       translate3d(${drift * progress}px, ${progress * (window.innerHeight + 120)}px, 0)
       rotateX(${rotX * progress}deg)
@@ -601,19 +632,17 @@ function makeParticle() {
 }
 
 function burstHearts() {
-  // Muchas partículas al abrir / cambiar página
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < 20; i++) {
     setTimeout(makeParticle, i * 45);
   }
 }
 
-// Partículas constantes mientras el libro está abierto
 setInterval(() => {
   if (book.classList.contains('show')) {
     makeParticle();
-    if (Math.random() > 0.6) makeParticle(); // a veces dos
+    if (Math.random() > 0.6) makeParticle();
   }
-}, 550);
+}, 600);
 </script>
 </body>
 </html>
